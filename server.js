@@ -3,11 +3,14 @@ const path = require('path');
 
 const app = express();
 
+
 const PORT = process.env.port || 3000;
+
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 let resturant = {
     current:[],
@@ -15,10 +18,12 @@ let resturant = {
 };
 
 
+
 //Routes
 
 // Basic route that sends the user first to the AJAX Page
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+
 
 app.get('/reserve', (req, res) => {
 
@@ -44,5 +49,6 @@ app.post('/reserve', (req,res) =>{
 
     res.json(newReservation);
 })
+
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
