@@ -18,17 +18,24 @@ let resturant = {
 //Routes
 
 // Basic route that sends the user first to the AJAX Page
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'home.html')));
+
+app.get('/api/tables', (req,res) => {
+    res.json(resturant.current);
+});
+
+app.get('/api/waitList', (req,res) => {
+    res.json(resturant.waitList);
+});
 
 app.get('/reserve', (req, res) => {
 
-    res.sendFile(path.join(__dirname, 'reserve.html'))
-    res.json(current);
+    res.sendFile(path.join(__dirname, 'reserve.html'));
 });
 
 app.get('/tables', (req, res) => {
     res.sendFile(path.join(__dirname, 'tables.html'))
-    res.json(resturant)
+
 });
 
 app.post('/reserve', (req,res) =>{
@@ -36,13 +43,16 @@ app.post('/reserve', (req,res) =>{
 
     if(resturant.current.length == 5){
         resturant.waitList.push(newReservation);
+        res.json(newReservation);
     }
     else{
         resturant.current.push(newReservation);
+        res.json(newReservation);
+
 
     }
 
-    res.json(newReservation);
+    //res.json(newReservation);
 })
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
