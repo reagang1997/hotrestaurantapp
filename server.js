@@ -3,16 +3,24 @@ const path = require('path');
 
 const app = express();
 
+<<<<<<< HEAD
 const PORT = process.env.PORT || 3000;
+=======
+
+const PORT = process.env.port || 3000;
+>>>>>>> b938892ed0fcc80f3aa2ff980cb383997f4c8e70
+
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
 let resturant = {
     current:[],
     waitList:[]
 };
+
 
 
 //Routes
@@ -27,6 +35,7 @@ app.get('/api/tables', (req,res) => {
 app.get('/api/waitList', (req,res) => {
     res.json(resturant.waitList);
 });
+
 
 app.get('/reserve', (req, res) => {
 
@@ -54,5 +63,6 @@ app.post('/reserve', (req,res) =>{
 
     //res.json(newReservation);
 })
+
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
